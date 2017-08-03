@@ -1,4 +1,4 @@
-package site.moree;
+package me.moree;
 
 import org.junit.Test;
 import org.slf4j.Logger;
