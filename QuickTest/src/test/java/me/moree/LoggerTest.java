@@ -16,6 +16,8 @@ public class LoggerTest {
 		int i = 1;
 		String str = "haha";
 		logger.info("{} {}", i, str);
+		logger.info("This is an info log.");
+        logger.debug("This is a debug log.");
 	}
 
 }
