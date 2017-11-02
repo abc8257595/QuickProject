@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -64,5 +66,22 @@ public class CalendarTest {
 
 	    System.out.println(defaultC.getTime().getTime() - beijingC.getTime().getTime());
 	    System.out.println((sfoC.getTime().getTime() - beijingC.getTime().getTime()) / 3600000);
+    }
+
+    @Test
+    public void getTodayTimestamp() {
+	    Calendar defaultC = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
+	    defaultC.setTimeInMillis(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+	    defaultC.set(Calendar.HOUR_OF_DAY, 0);
+	    defaultC.set(Calendar.MINUTE, 0);
+	    defaultC.set(Calendar.SECOND, 0);
+	    defaultC.set(Calendar.MILLISECOND, 0);
+
+	    System.out.println(defaultC.getTime().getTime());
+    }
+
+    @Test
+    public void localDateTest() {
+	    System.out.println(LocalDate.now(ZoneId.of("GMT+10")));
     }
 }
