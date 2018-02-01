@@ -45,4 +45,13 @@ public class StringTest {
         Assert.assertArrayEquals(split3, str.split("o", 5));
     }
 
+	@Test
+	// join测试
+	public void joinTest() {
+		String str1 = "1";
+		String str2 = null;
+		String str3 = "3";
+		String newStr = String.join(", ", str1, str2, str3);
+		System.out.println(newStr);
+	}
 }
