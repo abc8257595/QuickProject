@@ -39,6 +39,15 @@ public class BitTest {
 		Assert.assertEquals(diff(num3, num4), 6);
 	}
 
+	/**
+	 * 生成指定位数
+	 */
+	@Test
+	public void ofTest() {
+		Assert.assertEquals(3, of(0, 1));
+		Assert.assertEquals(7, of(0, 1, 2));
+	}
+
 	private int setBit(int num, int pos) {
 		return num | (1 << pos);
 	}
@@ -53,5 +62,13 @@ public class BitTest {
 
 	private static int diff(int num1, int num2) {
 		return num1 ^ num2;
+	}
+
+	public static int of(int... posList) {
+		int num = 0;
+		for (int pos : posList) {
+			num = num | (1 << pos);
+		}
+		return num;
 	}
 }
