@@ -45,22 +45,30 @@ public class TimeTest {
 	}
 
 	/**
-	 * 转至时间戳
+	 * 转至时间戳，指定格式时间转至时间戳
 	 */
 	@Test
 	public void toTimestamp() {
 		OffsetDateTime dt = OffsetDateTime.now(ZoneId.of("GMT+7")).withMonth(4).withDayOfMonth(14);
 		System.out.println(dt.toEpochSecond() * 1000);
 
-		System.out.println(parseToTimestamp("20180514193000"));
-		System.out.println(parseToTimestamp("20180514183000"));
+		System.out.println(parseToTimestamp("20180514193000", "+08"));
+		System.out.println(parseToTimestamp2("20180514193000", "+07"));
 	}
 
-	private Long parseToTimestamp(String expireTimeStr) {
+	private Long parseToTimestamp(String expireTimeStr, String zoneOffset) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		LocalDateTime dt = LocalDateTime.parse(expireTimeStr, formatter);
-		return dt.toEpochSecond(ZoneOffset.of("+7")) * 1000;
+		return dt.toEpochSecond(ZoneOffset.of(zoneOffset)) * 1000;
 	}
+
+	private Long parseToTimestamp2(String expireTimeStr, String zoneOffset) {
+	    // OffsetDateTime parse时需要指定时区，否则会报错
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssX");
+		OffsetDateTime dt = OffsetDateTime.parse(expireTimeStr + zoneOffset, formatter);
+		return dt.toEpochSecond() * 1000;
+    }
+
 
 	@Test
 	public void localTimeTest() {
@@ -77,6 +85,9 @@ public class TimeTest {
 		System.out.println(time2.isAfter(time2));
 	}
 
+	/**
+	 * OffsetTime时区转换
+	 */
 	@Test
 	public void offsetTimeTest() {
 		ZoneId zone = ZoneId.of("GMT+8");
@@ -85,6 +96,8 @@ public class TimeTest {
 		System.out.println(time1.withOffsetSameInstant(ZoneOffset.of("+0")));
 		System.out.println(time2.withOffsetSameInstant(ZoneOffset.of("+0")));
 	}
+
+	// before after test
 
 	@Test
 	public void beforeAfterTest() {
