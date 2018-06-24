@@ -1,0 +1,3 @@
+wsimport -s hholiday -p me.moree.wsdl.holidayservice_v2 http://www.holidaywebservice.com//HolidayService_v2/HolidayService2.asmx?wsdl
+
+wsimport -s hmandiri -p me.moree.wsdl.mandiri BillPaymentService.wsdl
